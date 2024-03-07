@@ -12,7 +12,7 @@ body{/*Selector*/
 
 header{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     align-content: center;
     width: 100%;
     background-color: #192733;
@@ -84,20 +84,24 @@ header{
   .container3{
     /* background-color: lightcoral; */
     justify-content: center;
-    display: flexbox block;
+    /* display: flexbox block; */
     flex:1;
   }
   
   .container3 p{
+    list-style: none;
     margin: 1rem -3rem 0px;
   }
-  .sci li{
-      list-style: none;
+  .sci{
+      /* list-style: none; */
       display: flex;
-      flex-direction: column;
-      align-content: space-between;
-      justify-content: flex-start !important;
-      margin: 1rem -9rem -1px;
+      flex-direction: row;
+      align-content: center;
+      justify-content: center;
+      margin: 1rem 1vh 1rem;
+  }
+  .sci li{
+      display: flex;
   }
   
   footer p{
@@ -110,7 +114,7 @@ header{
       text-align: center;
       color: white;
   }
-@media (max-width: 991px){
+/* @media (max-width: 991px){
     footer{
         padding: 40px;
     }
@@ -129,4 +133,4 @@ header{
     .copyrightText{
         padding: 8px 40px;
     }
-}
+} */
