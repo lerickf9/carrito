@@ -24,8 +24,14 @@ document.addEventListener('DOMContentLoaded', function(){
             return;
         }
 
+        if(e.target.id === 'email' && !validarEmail(e.target.value)){
+            mostrarAlerta('El Email no es valido', e.target.parentElement);
+            return;
+        }
+
         limpiarAlerta(e.target.parentElement);
 
+        
     }
 
     //Alertas
@@ -35,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
         const error = document.createElement('P');
         error.textContent = mensaje;
-        error.classList.add('bg-red-600', 'text-white', 'p-2' , 'text-center');//Tailwind aclara a toda clase una propiedad
+        error.classList.add('bg-red-600', 'text-white', 'p-2' , 'text-center');//Tailwind aclara a toda la clase una propiedad
 
         //Inyectar un error al formulario
         referencia.appendChild(error);
@@ -47,5 +53,12 @@ document.addEventListener('DOMContentLoaded', function(){
         if(alerta){
             alerta.remove();
         }
+    }
+
+    function validarEmail(email){
+        //Expresion regular para email
+        const regex = /^\w+([.-_+]?\w+)*@\w+([.-]?\w+)*(\.\w{2,10})+$/ 
+        const resultado = regex.test(email);
+        return resultado;
     }
 });
