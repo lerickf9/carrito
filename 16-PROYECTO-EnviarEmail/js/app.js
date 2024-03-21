@@ -18,21 +18,34 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
     function validar(e){
+        //console.log(e.target.parentElement.nextElementSibling.nextElementSibling);
         if(e.target.value.trim() ===''){//Trim asegura los campos con espacios
-            mostrarAlerta();
-        }else{
-            console.log(e.target.value);
+            mostrarAlerta(`El campo ${e.target.id} es obligatorio`, e.target.parentElement);
+            return;
         }
+
+        limpiarAlerta(e.target.parentElement);
+
     }
 
     //Alertas
-    function mostrarAlerta(){
+    function mostrarAlerta(mensaje, referencia){
+        //Comprueba si ya tiene una alerta
+        limpiarAlerta(referencia);
+
         const error = document.createElement('P');
-        error.textContent = ' Hubo un error ';
+        error.textContent = mensaje;
         error.classList.add('bg-red-600', 'text-white', 'p-2' , 'text-center');//Tailwind aclara a toda clase una propiedad
 
         //Inyectar un error al formulario
-        formulario.appendChild(error);
+        referencia.appendChild(error);
         // formulario.innerHTML = error.innerHTML
+    }
+
+    function limpiarAlerta(referencia){
+        const alerta = referencia.querySelector('.bg-red-600');
+        if(alerta){
+            alerta.remove();
+        }
     }
 });
