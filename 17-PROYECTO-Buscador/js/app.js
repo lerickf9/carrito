@@ -30,7 +30,7 @@ const datosBusqueda = {
 
 //Eventos
 document.addEventListener('DOMContentLoaded', () =>{
-    mostrarAutos(); //Muestras los autos al cargar
+    mostrarAutos(autos); //Muestras los autos al cargar
 
 
     //Lena las opciones de años
@@ -46,13 +46,16 @@ marca.addEventListener('change', e =>{
 });
 
 year.addEventListener('change', e =>{
+    
     datosBusqueda.year = parseInt(e.target.value);
-
-    filtrarYear();
+    // console.log(e.target.value);
+    filtrarAuto();
 });
 
 minimo.addEventListener('change', e =>{
     datosBusqueda.minimo = e.target.value;
+
+    filtrarAuto();
 });
 
 maximo.addEventListener('change', e =>{
@@ -73,7 +76,10 @@ color.addEventListener('change', e =>{
 });
 
 //Funciones
-function mostrarAutos(){
+function mostrarAutos(autos){
+
+    limpiarHTML(); // elimina el HTML previo
+
     autos.forEach( auto => {
 
         const {marca, modelo, year, puertas, transmision, precio, color} = auto;
@@ -89,6 +95,14 @@ function mostrarAutos(){
     });
 }
 
+//limpiar html 
+function limpiarHTML(){
+    while(resultado.firstChild){
+        resultado.removeChild(resultado.firstChild);
+    }
+}
+
+
 //Genera los años del select
 function llenarSelect(){
 
@@ -96,7 +110,7 @@ function llenarSelect(){
         const opcion = document.createElement('option');
         opcion.value = i;
         opcion.textContent = i;
-        year.appendChild(opcion);//Agrefa las opciones a select
+        year.appendChild(opcion);//Agrega las opciones a select
     }
 }
 
@@ -107,7 +121,8 @@ function filtrarAuto(){
     //los filter es una funcion de array method entonces se puede concatenar con otros filtros
     const resultado = autos.filter( filtrarMarca ).filter( filtrarYear )
 
-    console.log(resultado);
+    // console.log(resultado);
+    mostrarAutos( resultado );
 }
 
 
@@ -121,7 +136,7 @@ function filtrarMarca(auto){
 
 function filtrarYear (auto) {
     const { year } = datosBusqueda;
-    
+    console.log(typeof year);
     if( year ){
         return auto.year === year;
     }
